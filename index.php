@@ -55,9 +55,39 @@ $hotels = [
 
 
     <div id="app">
-      <div class="container">
+      <div class="container py-5">
 
-      <ul>
+      <table class="table">
+
+        <thead>
+          <tr>
+            <?php foreach ($hotels[1] as $key => $hotel): ?>
+              <th><?php echo strtoupper($key); ?></th>
+            <?php endforeach; ?>
+          </tr>
+        </thead>
+
+        <tbody>
+          <?php foreach ($hotels as $hotel): ?>
+            <tr>
+
+              <?php foreach ($hotel as $key => $value): ?>
+
+                <td>
+                  <?php if($key === "parking"){
+                    $value ? $value = "Si" : $value = "No";
+                  } echo $value; ?>
+                </td>
+
+              <?php endforeach; ?>
+
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+
+      </table>
+
+      <!--<ul>
         <?php foreach ($hotels as $key => $hotel): ?>
           <li><?php echo "$key Hotel <br>"; ?></li>
 
@@ -68,7 +98,7 @@ $hotels = [
           </ul>
 
         <?php endforeach; ?>
-      </ul>
+      </ul>-->
 
       </div>
     </div>
