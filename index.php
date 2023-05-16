@@ -38,6 +38,26 @@ $hotels = [
   ] 
 ];
 
+$varSelect = $_POST['parkingForm'];
+var_dump($varSelect);
+
+$listHotel = $hotels;
+
+if($varSelect == null){
+  $listHotel=[];
+  $listHotel = $hotels;
+} elseif ($varSelect == 'true'){
+  $listHotel=[];
+  foreach($hotels as $hotel){
+    $hotel['parking'] ? array_push($listHotel, $hotel) : null;
+  }
+} elseif ($varSelect == 'false'){
+  $listHotel=[];
+  foreach($hotels as $hotel){
+    !$hotel['parking'] ? array_push($listHotel, $hotel) : null;
+  }
+} 
+
 
 ?>
 
@@ -57,6 +77,15 @@ $hotels = [
     <div id="app">
       <div class="container py-5">
 
+      <form action="./index.php" method="POST" class="py-4">
+        <select class="form-select w-25 d-inline" aria-label="Default select example" name="parkingForm">
+          <option selected value="">All Hotels</option>
+          <option value="false">Parking NO</option>
+          <option value="true">Parking YES</option>
+        </select>
+        <button class="btn btn-primary mx-3" type="submit">Cerca</button>
+      </form>
+
       <table class="table">
 
         <thead>
@@ -68,7 +97,7 @@ $hotels = [
         </thead>
 
         <tbody>
-          <?php foreach ($hotels as $hotel): ?>
+          <?php foreach ($listHotel as $hotel): ?>
             <tr>
 
               <?php foreach ($hotel as $key => $value): ?>
